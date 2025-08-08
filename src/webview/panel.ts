@@ -87,9 +87,15 @@ export class WebviewPanel {
     }
     
     private getWebviewContent(graphData: IGraphData): string {
-        const scriptUri = this.getUri('webview', 'webview.js');
-        const styleUri = this.getUri('webview', 'styles.css');
-        const d3Uri = this.getUri('../../node_modules/d3/dist', 'd3.min.js');
+        const scriptUri = this.panel?.webview.asWebviewUri(
+            vscode.Uri.joinPath(this.context.extensionUri, 'src', 'webview', 'graph.js')
+        );
+        const styleUri = this.panel?.webview.asWebviewUri(
+            vscode.Uri.joinPath(this.context.extensionUri, 'src', 'webview', 'styles', 'main.css')
+        );
+        const d3Uri = this.panel?.webview.asWebviewUri(
+            vscode.Uri.joinPath(this.context.extensionUri, 'node_modules', 'd3', 'dist', 'd3.min.js')
+        );
         
         return `<!DOCTYPE html>
 <html lang="en">
@@ -139,12 +145,6 @@ export class WebviewPanel {
     <script src="${scriptUri}"></script>
 </body>
 </html>`;
-    }
-    
-    private getUri(...pathSegments: string[]): vscode.Uri {
-        return this.panel!.webview.asWebviewUri(
-            vscode.Uri.joinPath(this.context.extensionUri, 'dist', ...pathSegments)
-        );
     }
     
     dispose(): void {
