@@ -22,7 +22,7 @@
     "typescript",
     "javascript"
   ],
-  "icon": "resources/icon.png",
+  "icon": "resources/icon.svg",
   "galleryBanner": {
     "color": "#2C2C32",
     "theme": "dark"

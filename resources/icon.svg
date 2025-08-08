@@ -1,0 +1,46 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="128" height="128" rx="16" fill="#1e1e1e"/>
+  
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3178c6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#61dafb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="edgeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#868e96;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#868e96;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Graph edges/connections -->
+  <line x1="32" y1="32" x2="64" y2="64" stroke="url(#edgeGradient)" stroke-width="2"/>
+  <line x1="96" y1="32" x2="64" y2="64" stroke="url(#edgeGradient)" stroke-width="2"/>
+  <line x1="64" y1="64" x2="32" y2="96" stroke="url(#edgeGradient)" stroke-width="2"/>
+  <line x1="64" y1="64" x2="96" y2="96" stroke="url(#edgeGradient)" stroke-width="2"/>
+  <line x1="32" y1="32" x2="96" y2="32" stroke="url(#edgeGradient)" stroke-width="2"/>
+  <line x1="32" y1="96" x2="96" y2="96" stroke="url(#edgeGradient)" stroke-width="2"/>
+  
+  <!-- Graph nodes -->
+  <!-- Top left node -->
+  <circle cx="32" cy="32" r="8" fill="#3178c6" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Top right node -->
+  <circle cx="96" cy="32" r="8" fill="#f7df1e" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Center node (larger, main) -->
+  <circle cx="64" cy="64" r="12" fill="url(#nodeGradient)" stroke="#ffffff" stroke-width="2.5"/>
+  
+  <!-- Bottom left node -->
+  <circle cx="32" cy="96" r="8" fill="#61dafb" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Bottom right node -->
+  <circle cx="96" cy="96" r="8" fill="#51cf66" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Small decorative nodes -->
+  <circle cx="64" cy="32" r="4" fill="#868e96" opacity="0.6"/>
+  <circle cx="32" cy="64" r="4" fill="#868e96" opacity="0.6"/>
+  <circle cx="96" cy="64" r="4" fill="#868e96" opacity="0.6"/>
+  <circle cx="64" cy="96" r="4" fill="#868e96" opacity="0.6"/>
+</svg>
