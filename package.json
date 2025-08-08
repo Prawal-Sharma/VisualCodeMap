@@ -1,0 +1,193 @@
+{
+  "name": "visual-code-map",
+  "displayName": "Visual Code Map",
+  "description": "Generate interactive visual maps of your codebase showing file dependencies and module relationships",
+  "version": "0.1.0",
+  "publisher": "prawal-sharma",
+  "engines": {
+    "vscode": "^1.74.0",
+    "node": ">=16.0.0"
+  },
+  "categories": [
+    "Visualization",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "dependency",
+    "graph",
+    "visualization",
+    "code map",
+    "architecture",
+    "typescript",
+    "javascript"
+  ],
+  "icon": "resources/icon.png",
+  "galleryBanner": {
+    "color": "#2C2C32",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Prawal-Sharma/VisualCodeMap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Prawal-Sharma/VisualCodeMap/issues"
+  },
+  "homepage": "https://github.com/Prawal-Sharma/VisualCodeMap#readme",
+  "license": "MIT",
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onCommand:visualCodeMap.generate",
+    "onCommand:visualCodeMap.refresh",
+    "onCommand:visualCodeMap.export"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "visualCodeMap.generate",
+        "title": "Generate Code Map",
+        "category": "Visual Code Map"
+      },
+      {
+        "command": "visualCodeMap.refresh",
+        "title": "Refresh Code Map",
+        "category": "Visual Code Map"
+      },
+      {
+        "command": "visualCodeMap.export",
+        "title": "Export Code Map",
+        "category": "Visual Code Map"
+      }
+    ],
+    "configuration": {
+      "title": "Visual Code Map",
+      "properties": {
+        "visualCodeMap.maxDepth": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum depth for dependency analysis"
+        },
+        "visualCodeMap.excludePatterns": {
+          "type": "array",
+          "default": [
+            "node_modules",
+            "dist",
+            "build",
+            ".git",
+            "coverage"
+          ],
+          "description": "Patterns to exclude from analysis"
+        },
+        "visualCodeMap.colorScheme": {
+          "type": "string",
+          "default": "default",
+          "enum": [
+            "default",
+            "dark",
+            "light",
+            "colorblind"
+          ],
+          "description": "Color scheme for the graph visualization"
+        },
+        "visualCodeMap.showOrphanedFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show files with no dependencies"
+        },
+        "visualCodeMap.layout": {
+          "type": "string",
+          "default": "force-directed",
+          "enum": [
+            "force-directed",
+            "hierarchical",
+            "circular",
+            "grid"
+          ],
+          "description": "Graph layout algorithm"
+        },
+        "visualCodeMap.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debug logging"
+        },
+        "visualCodeMap.cacheEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable caching of parsed files"
+        }
+      }
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "visualCodeMap.generate",
+          "when": "explorerResourceIsFolder",
+          "group": "navigation@99"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "visualCodeMap.refresh",
+          "when": "visualCodeMap.active"
+        },
+        {
+          "command": "visualCodeMap.export",
+          "when": "visualCodeMap.active"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "test": "jest",
+    "test:unit": "jest --testPathPattern=unit",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext ts,tsx",
+    "lint:fix": "eslint src --ext ts,tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json,css,md}\"",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist out coverage",
+    "benchmark": "ts-node scripts/benchmark.ts",
+    "profile": "ts-node scripts/profile.ts"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@vscode/test-electron": "^2.3.0",
+    "css-loader": "^6.7.0",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-react": "^7.32.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.0",
+    "rimraf": "^5.0.0",
+    "style-loader": "^3.3.0",
+    "ts-jest": "^29.1.0",
+    "ts-loader": "^9.4.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.0"
+  },
+  "dependencies": {
+    "d3": "^7.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ts-morph": "^21.0.0"
+  }
+}
