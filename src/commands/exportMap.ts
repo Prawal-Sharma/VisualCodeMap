@@ -128,7 +128,7 @@ export class ExportMapCommand {
         await fs.promises.writeFile(filePath, htmlContent, 'utf-8');
     }
     
-    private async exportImage(format: string, filePath: string): Promise<void> {
+    private async exportImage(format: string, _filePath: string): Promise<void> {
         vscode.window.showInformationMessage(`${format} export will be implemented with webview integration`);
     }
 }

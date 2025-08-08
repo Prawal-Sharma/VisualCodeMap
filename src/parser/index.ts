@@ -141,6 +141,7 @@ export class Parser {
             if (defaultImport) {
                 specifiers.push({
                     name: defaultImport.getText(),
+                    alias: undefined,
                     isDefault: true,
                     isNamespace: false
                 });
@@ -150,6 +151,7 @@ export class Parser {
             if (namespaceImport) {
                 specifiers.push({
                     name: namespaceImport.getText(),
+                    alias: undefined,
                     isDefault: false,
                     isNamespace: true
                 });

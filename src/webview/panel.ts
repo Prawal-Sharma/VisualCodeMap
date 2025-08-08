@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
 import { Logger } from '../utils/logger';
 import { IGraphData } from '../types/graph';
 
