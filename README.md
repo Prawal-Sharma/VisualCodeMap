@@ -1,5 +1,10 @@
 # Visual Code Map
 
+[![Version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/Prawal-Sharma/VisualCodeMap/releases)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![VS Code](https://img.shields.io/badge/VS%20Code-1.74%2B-brightgreen)](https://code.visualstudio.com/)
+[![Build Status](https://github.com/Prawal-Sharma/VisualCodeMap/workflows/Publish%20to%20VS%20Code%20Marketplace/badge.svg)](https://github.com/Prawal-Sharma/VisualCodeMap/actions)
+
 A VS Code extension that generates interactive visual maps of your codebase, showing file dependencies and module relationships to help developers understand and navigate large projects.
 
 ## Features
