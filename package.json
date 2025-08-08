@@ -4,6 +4,9 @@
   "description": "Generate interactive visual maps of your codebase showing file dependencies and module relationships",
   "version": "0.1.0",
   "publisher": "prawal-sharma",
+  "author": {
+    "name": "Prawal Sharma"
+  },
   "engines": {
     "vscode": "^1.74.0",
     "node": ">=16.0.0"
@@ -185,6 +188,7 @@
     "webpack-cli": "^5.0.0"
   },
   "dependencies": {
+    "archiver": "^7.0.1",
     "d3": "^7.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
