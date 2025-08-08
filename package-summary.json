@@ -1,0 +1,143 @@
+{
+  "name": "visual-code-map",
+  "displayName": "Visual Code Map",
+  "version": "0.1.0",
+  "publisher": "prawal-sharma",
+  "description": "Generate interactive visual maps of your codebase showing file dependencies and module relationships",
+  "categories": [
+    "Visualization",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "dependency",
+    "graph",
+    "visualization",
+    "code map",
+    "architecture",
+    "typescript",
+    "javascript"
+  ],
+  "engines": {
+    "vscode": "^1.74.0",
+    "node": ">=16.0.0"
+  },
+  "activationEvents": [
+    "onCommand:visualCodeMap.generate",
+    "onCommand:visualCodeMap.refresh",
+    "onCommand:visualCodeMap.export"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "visualCodeMap.generate",
+        "title": "Generate Code Map",
+        "category": "Visual Code Map"
+      },
+      {
+        "command": "visualCodeMap.refresh",
+        "title": "Refresh Code Map",
+        "category": "Visual Code Map"
+      },
+      {
+        "command": "visualCodeMap.export",
+        "title": "Export Code Map",
+        "category": "Visual Code Map"
+      }
+    ],
+    "configuration": {
+      "title": "Visual Code Map",
+      "properties": {
+        "visualCodeMap.maxDepth": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum depth for dependency analysis"
+        },
+        "visualCodeMap.excludePatterns": {
+          "type": "array",
+          "default": [
+            "node_modules",
+            "dist",
+            "build",
+            ".git",
+            "coverage"
+          ],
+          "description": "Patterns to exclude from analysis"
+        },
+        "visualCodeMap.colorScheme": {
+          "type": "string",
+          "default": "default",
+          "enum": [
+            "default",
+            "dark",
+            "light",
+            "colorblind"
+          ],
+          "description": "Color scheme for the graph visualization"
+        },
+        "visualCodeMap.showOrphanedFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show files with no dependencies"
+        },
+        "visualCodeMap.layout": {
+          "type": "string",
+          "default": "force-directed",
+          "enum": [
+            "force-directed",
+            "hierarchical",
+            "circular",
+            "grid"
+          ],
+          "description": "Graph layout algorithm"
+        },
+        "visualCodeMap.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debug logging"
+        },
+        "visualCodeMap.cacheEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable caching of parsed files"
+        }
+      }
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "visualCodeMap.generate",
+          "when": "explorerResourceIsFolder",
+          "group": "navigation@99"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "visualCodeMap.refresh",
+          "when": "visualCodeMap.active"
+        },
+        {
+          "command": "visualCodeMap.export",
+          "when": "visualCodeMap.active"
+        }
+      ]
+    }
+  },
+  "main": "./dist/extension.js",
+  "icon": "resources/icon.svg",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Prawal-Sharma/VisualCodeMap.git"
+  },
+  "license": "MIT",
+  "files": [
+    "dist/**/*",
+    "src/webview/graph.js",
+    "src/webview/styles/main.css",
+    "resources/**/*",
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ]
+}
