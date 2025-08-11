@@ -45,10 +45,25 @@ const webviewConfig = {
   entry: './src/webview/graph.js',
   output: {
     path: path.resolve(__dirname, 'dist/webview'),
-    filename: 'webview.js'
+    filename: 'webview.js',
+    library: 'GraphVisualization',
+    libraryTarget: 'window'
   },
   resolve: {
     extensions: ['.js'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
+    ]
   },
   devtool: 'nosources-source-map'
 };

@@ -90,9 +90,6 @@ export class WebviewPanel {
         const scriptUri = this.panel?.webview.asWebviewUri(
             vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'webview', 'webview.js')
         );
-        const d3Uri = this.panel?.webview.asWebviewUri(
-            vscode.Uri.joinPath(this.context.extensionUri, 'node_modules', 'd3', 'dist', 'd3.min.js')
-        );
         
         return `<!DOCTYPE html>
 <html lang="en">
@@ -139,9 +136,16 @@ export class WebviewPanel {
     <script>
         const vscode = acquireVsCodeApi();
         const initialData = ${JSON.stringify(graphData)};
+        window.vscode = vscode;
+        window.initialData = initialData;
     </script>
-    <script src="${d3Uri}"></script>
     <script src="${scriptUri}"></script>
+    <script>
+        // Initialize the graph after the script loads
+        if (window.GraphVisualization && window.GraphVisualization.initialize) {
+            window.GraphVisualization.initialize(vscode, initialData);
+        }
+    </script>
 </body>
 </html>`;
     }

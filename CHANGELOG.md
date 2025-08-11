@@ -5,6 +5,20 @@ All notable changes to the Visual Code Map extension will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2025-01-11
+
+### Fixed
+- **Critical Fix**: D3.js library now properly bundled with extension
+- Graph visualization now renders correctly 
+- All interactive features (zoom, pan, search, layout switching) now work
+- Fixed issue where D3 was not included in the published package
+- Buttons and controls are now fully functional
+
+### Changed
+- D3.js is now bundled directly with webpack instead of loaded separately
+- Updated build configuration to use ES6 modules
+- Improved initialization sequence for better reliability
+
 ## [0.1.1] - 2025-01-11
 
 ### Fixed
