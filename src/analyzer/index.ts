@@ -90,15 +90,28 @@ export class Analyzer {
     
     private findOrphanedFiles(files: string[], dependencyMap: Map<string, Set<string>>): string[] {
         const orphaned: string[] = [];
-        const referenced = new Set<string>();
+        const importedBy = new Map<string, Set<string>>();
         
+        // Build reverse dependency map (who imports each file)
         for (const [source, targets] of dependencyMap.entries()) {
-            referenced.add(source);
-            targets.forEach(target => referenced.add(target));
+            for (const target of targets) {
+                if (!importedBy.has(target)) {
+                    importedBy.set(target, new Set());
+                }
+                importedBy.get(target)!.add(source);
+            }
         }
         
+        // A file is orphaned if:
+        // 1. It has no imports (doesn't import anything)
+        // 2. It's not imported by any other file
+        // 3. It's not an entry point (we'll check this separately)
         for (const file of files) {
-            if (!referenced.has(file)) {
+            const hasNoImports = !dependencyMap.has(file) || dependencyMap.get(file)!.size === 0;
+            const notImportedByOthers = !importedBy.has(file) || importedBy.get(file)!.size === 0;
+            
+            // Consider it orphaned if it has no connections at all
+            if (hasNoImports && notImportedByOthers) {
                 orphaned.push(file);
             }
         }

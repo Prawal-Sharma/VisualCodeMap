@@ -109,6 +109,7 @@ export class WebviewPanel {
         <button id="zoom-reset" title="Reset Zoom">⟲</button>
         <button id="refresh" title="Refresh">↻</button>
         <button id="export" title="Export">⬇</button>
+        <button id="help" title="Help (H)">?</button>
         <input type="text" id="search" placeholder="Search nodes...">
         <select id="layout">
             <option value="force-directed">Force Directed</option>
@@ -121,6 +122,9 @@ export class WebviewPanel {
     </div>
     <div id="graph-container">
         <svg id="graph"></svg>
+        <div id="minimap" style="position: absolute; bottom: 20px; right: 320px; width: 200px; height: 150px; background: var(--vscode-editor-background, #1e1e1e); border: 1px solid var(--vscode-widget-border, #454545); border-radius: 4px; overflow: hidden;">
+            <svg id="minimap-svg" style="width: 100%; height: 100%;"></svg>
+        </div>
     </div>
     <div id="info-panel">
         <h3>Graph Statistics</h3>
