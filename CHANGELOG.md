@@ -5,6 +5,39 @@ All notable changes to the Visual Code Map extension will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2025-01-11
+
+### Added
+- **Advanced Search**: Regex support for powerful search patterns
+- **Export Functionality**: Export graphs as SVG, PNG, or JSON
+- **Interactive Minimap**: Bird's-eye view navigation with click-to-jump
+- **Keyboard Shortcuts**: Comprehensive shortcuts for all major actions
+- **Help Dialog**: In-app help with keyboard shortcuts guide
+- **Dependency Visualization**: Line thickness and color based on import count and type
+- **Search Results Panel**: Clickable results for quick navigation
+- **Link Tooltips**: Hover over dependencies to see detailed information
+
+### Fixed
+- **Zoom Controls**: Fixed D3 zoom behavior for smooth zooming
+- **Orphaned Files**: Corrected detection algorithm for files with no connections
+- **Hierarchical Layout**: Properly organizes files by directory depth
+- **Circular Layout**: Smooth transitions with proper link updates
+- **Layout Transitions**: All layouts now animate smoothly
+- **Show Orphaned Toggle**: Now properly hides/shows orphaned nodes
+
+### Changed
+- Enhanced link visualization with color coding by dependency type
+- Improved minimap rendering performance
+- Better graph update cycle management
+- Optimized memory usage for large graphs
+- Enhanced visual feedback for all interactions
+
+### Technical Improvements
+- Added viewport indicator in minimap
+- Implemented proper zoom transform tracking
+- Improved node highlighting algorithms
+- Better error handling throughout
+
 ## [0.1.2] - 2025-01-11
 
 ### Fixed

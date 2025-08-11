@@ -2,7 +2,7 @@
   "name": "visual-code-map",
   "displayName": "Visual Code Map",
   "description": "Generate interactive visual maps of your codebase showing file dependencies and module relationships",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "prawal-sharma",
   "author": {
     "name": "Prawal Sharma"
