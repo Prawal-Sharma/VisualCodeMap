@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const extensionConfig = {
   target: 'node',
@@ -43,36 +42,14 @@ const extensionConfig = {
 const webviewConfig = {
   target: 'web',
   mode: 'none',
-  entry: './src/webview/app.tsx',
+  entry: './src/webview/graph.js',
   output: {
     path: path.resolve(__dirname, 'dist/webview'),
     filename: 'webview.js'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    alias: {
-      '@webview': path.resolve(__dirname, 'src/webview')
-    }
+    extensions: ['.js'],
   },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: 'ts-loader'
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/webview/index.html',
-      filename: 'index.html'
-    })
-  ],
   devtool: 'nosources-source-map'
 };
 

@@ -88,10 +88,7 @@ export class WebviewPanel {
     
     private getWebviewContent(graphData: IGraphData): string {
         const scriptUri = this.panel?.webview.asWebviewUri(
-            vscode.Uri.joinPath(this.context.extensionUri, 'src', 'webview', 'graph.js')
-        );
-        const styleUri = this.panel?.webview.asWebviewUri(
-            vscode.Uri.joinPath(this.context.extensionUri, 'src', 'webview', 'styles', 'main.css')
+            vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'webview', 'webview.js')
         );
         const d3Uri = this.panel?.webview.asWebviewUri(
             vscode.Uri.joinPath(this.context.extensionUri, 'node_modules', 'd3', 'dist', 'd3.min.js')
@@ -103,7 +100,9 @@ export class WebviewPanel {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src ${this.panel?.webview.cspSource} 'unsafe-inline'; style-src ${this.panel?.webview.cspSource} 'unsafe-inline';">
-    <link href="${styleUri}" rel="stylesheet">
+    <style>
+        ${this.getStyles()}
+    </style>
     <title>Visual Code Map</title>
 </head>
 <body>
@@ -145,6 +144,164 @@ export class WebviewPanel {
     <script src="${scriptUri}"></script>
 </body>
 </html>`;
+    }
+    
+    private getStyles(): string {
+        return `
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--vscode-editor-background, #1e1e1e);
+    color: var(--vscode-editor-foreground, #cccccc);
+    overflow: hidden;
+}
+
+#toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: var(--vscode-titleBar-activeBackground, #2c2c2c);
+    border-bottom: 1px solid var(--vscode-widget-border, #454545);
+    height: 60px;
+}
+
+#toolbar button {
+    padding: 6px 12px;
+    background: var(--vscode-button-background, #0e639c);
+    color: var(--vscode-button-foreground, #ffffff);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+#toolbar button:hover {
+    background: var(--vscode-button-hoverBackground, #1177bb);
+}
+
+#toolbar input[type="text"] {
+    padding: 6px 10px;
+    background: var(--vscode-input-background, #3c3c3c);
+    color: var(--vscode-input-foreground, #cccccc);
+    border: 1px solid var(--vscode-input-border, #454545);
+    border-radius: 2px;
+    width: 200px;
+}
+
+#toolbar select {
+    padding: 6px 10px;
+    background: var(--vscode-dropdown-background, #3c3c3c);
+    color: var(--vscode-dropdown-foreground, #cccccc);
+    border: 1px solid var(--vscode-dropdown-border, #454545);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#toolbar label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+#graph-container {
+    position: relative;
+    width: calc(100vw - 300px);
+    height: calc(100vh - 60px);
+    float: left;
+}
+
+#graph {
+    width: 100%;
+    height: 100%;
+    background: var(--vscode-editor-background, #1e1e1e);
+}
+
+.node {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.node:hover {
+    stroke-width: 3px;
+    filter: brightness(1.2);
+}
+
+.node-label {
+    fill: var(--vscode-editor-foreground, #cccccc);
+    font-size: 12px;
+    user-select: none;
+    pointer-events: none;
+}
+
+.link {
+    stroke: #999;
+    stroke-opacity: 0.6;
+    pointer-events: none;
+}
+
+#info-panel {
+    position: fixed;
+    right: 0;
+    top: 60px;
+    width: 300px;
+    height: calc(100vh - 60px);
+    background: var(--vscode-sideBar-background, #252526);
+    border-left: 1px solid var(--vscode-widget-border, #454545);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#info-panel h3 {
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--vscode-foreground, #cccccc);
+}
+
+#stats {
+    margin-bottom: 30px;
+}
+
+#stats div {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--vscode-widget-border, #454545);
+}
+
+#stats span {
+    font-weight: 600;
+    color: var(--vscode-textLink-activeForeground, #3794ff);
+}
+
+#node-info {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--vscode-editor-foreground, #cccccc);
+}
+
+.tooltip {
+    position: absolute;
+    padding: 8px 12px;
+    background: var(--vscode-editorWidget-background, #252526);
+    border: 1px solid var(--vscode-widget-border, #454545);
+    border-radius: 3px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+        `;
     }
     
     dispose(): void {
